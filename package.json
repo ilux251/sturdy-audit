@@ -1,0 +1,78 @@
+{
+  "name": "sturdy-audit",
+  "main": "app.js",
+  "version": "0.0.1",
+  "scripts": {
+    "watch": "npx shadow-cljs watch app browser-test karma-test",
+    "release": "npx shadow-cljs release app",
+    "build-report": "npx shadow-cljs run shadow.cljs.build-report app target/build-report.html",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "pouchdb": "^7.3.0",
+    "pouchdb-find": "^7.3.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sqlite": "^4.1.1",
+    "sqlite3": "^5.0.8"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.7.0",
+    "electron": "^19.0.4",
+    "electron-builder": "^23.0.3",
+    "electron-packager": "^15.5.1",
+    "grunt": "^1.5.3",
+    "shadow-cljs": "^2.19.0",
+    "shelljs": "^0.8.5"
+  },
+  "build": {
+    "appId": "stury.audit",
+    "productName": "Sturdy Audit",
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+      "!**/Gruntfile.js",
+      "!**/package-lock.json",
+      "!**/*~",
+      "!**/*.css.map"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/database/www/db.sqlite",
+        "to": "./db.sqlite"
+      }
+    ],
+    "directories": {
+      "output": "target/desktop/dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": "ia32"
+        }
+      ]
+    },
+    "nsis": {
+      "language": 7,
+      "uninstallDisplayName": "Sturdy Audit entfernen",
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "menuCategory": "Sturdy Audit",
+      "shortcutName": "Sturdy Audit",
+      "deleteAppDataOnUninstall": true,
+      "runAfterFinish": false
+    }
+  }
+}

@@ -12,3 +12,9 @@ pom.xml.asc
 .lein-failures
 .nrepl-port
 .cpcache/
+.calva/
+.clj-kondo/
+.shadow-cljs/
+node_modules/
+package-lock.json
+resources/public/js
