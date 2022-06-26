@@ -5,26 +5,20 @@
    [sturdy-audit.events :as events]
    ))
 
-(defn create-doc 
-  [{:keys [doc]}]
-  [:div
-   [:div (:title doc)]
-   [:div (:text doc)]
-   [:button {:on-click #(re-frame/dispatch [::events/remove-item doc])} "X"]])
+(defn audit-view
+  [audit]
+  ^{:key (str (:identnummer audit) "-" (:datum audit))} 
+  [:div {:class "audit"}
+   [:div (:identnummer audit)]
+   [:div (:bezeichnung audit)]
+   [:div (:datum audit)]
+   [:hr]])
 
 (defn main-panel []
-  (let [name (re-frame/subscribe [::subs/name])
-        docs (re-frame/subscribe [::subs/docs])]
+  (let [audits (re-frame/subscribe [::subs/get-audits])]
     [:div
-     [:h1
-      "Hello from " @name]
-     [:input {:type :text :value "Text" :on-change #(re-frame/dispatch [::events/set-input (-> % .-target .-value)])}]
-     [:button {:on-click (fn [e]
-                           (re-frame/dispatch
-                            [:pouchdb
-                             {:db "todos"
-                              :method :post
-                              :doc {:title "Title" :text "Text"}
-                              :success ::events/load-from-pouch}]))} "Create Todo"]
-     (map create-doc @docs)
+     [:input {:type "file" :id "file-input" :on-change #(re-frame/dispatch [::events/upload-files (-> % .-target .-files)])}]
+     [:button {:on-click #(re-frame/dispatch [::events/import-to-couchdb])} "Upload"]
+     (map audit-view @audits)
      ]))
+
