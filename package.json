@@ -47,12 +47,6 @@
       "!**/*~",
       "!**/*.css.map"
     ],
-    "extraResources": [
-      {
-        "from": "resources/database/www/db.sqlite",
-        "to": "./db.sqlite"
-      }
-    ],
     "directories": {
       "output": "target/desktop/dist"
     },

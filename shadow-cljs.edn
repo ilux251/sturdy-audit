@@ -7,6 +7,8 @@
  :dependencies
  [[reagent "1.1.1"]
   [re-frame "1.2.0"]
+  [jtk-dvlp/re-frame-readfile-fx "2.0.0"]
+  [hickory "0.7.1"]
   
   [com.stronganchortech/pouchdb-fx "0.1.0-SNAPSHOT"]]
 

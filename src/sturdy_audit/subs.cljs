@@ -3,16 +3,6 @@
    [re-frame.core :as re-frame]))
 
 (re-frame/reg-sub
- ::name
+ ::get-audits
  (fn [db]
-   (:name db)))
-
-(re-frame/reg-sub
- ::input
- (fn [db]
-   (:input db)))
-
-(re-frame/reg-sub
- ::docs
- (fn [db]
-   (:docs db)))
+   (:audits db)))
